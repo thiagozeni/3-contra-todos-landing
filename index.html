@@ -104,7 +104,11 @@
         transparent 3px
       );
       opacity: 0.6;
+      transition: opacity 0.25s ease;
     }
+    /* Esconde scanline enquanto algum vídeo controlado pelo usuário toca —
+       evita recompor o overlay sobre cada frame do vídeo */
+    body.video-playing::before { opacity: 0; }
 
     /* ANIMATIONS */
     @keyframes neonPulse {
@@ -1127,6 +1131,12 @@
 
       // Vídeos com controles (ex.: história): só pausa quando 100% fora da tela,
       // e só retoma se já estava tocando antes (intenção do usuário).
+      // Também marca body.video-playing para esconder o scanline overlay
+      // (evita recomposição do overlay sobre cada frame do vídeo).
+      const updatePlayingFlag = () => {
+        const anyPlaying = Array.from(userVideos).some(v => !v.paused && !v.ended);
+        document.body.classList.toggle('video-playing', anyPlaying);
+      };
       userVideos.forEach(v => {
         let wasPlaying = false;
         const userObs = new IntersectionObserver((entries) => {
@@ -1144,12 +1154,15 @@
         }, { threshold: [0, 0.5] });
         userObs.observe(v);
 
-        // Se o usuário pausa manualmente enquanto está visível, esquecer o estado.
+        v.addEventListener('play', updatePlayingFlag);
+        v.addEventListener('playing', updatePlayingFlag);
         v.addEventListener('pause', () => {
+          updatePlayingFlag();
           if (v.getBoundingClientRect().top < window.innerHeight && v.getBoundingClientRect().bottom > 0) {
             wasPlaying = false;
           }
         });
+        v.addEventListener('ended', updatePlayingFlag);
       });
     })();
 
