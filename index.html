@@ -106,9 +106,31 @@
       opacity: 0.6;
       transition: opacity 0.25s ease;
     }
-    /* Esconde scanline enquanto algum vídeo controlado pelo usuário toca —
-       evita recompor o overlay sobre cada frame do vídeo */
+    /* Enquanto algum vídeo controlado pelo usuário toca:
+       - esconde scanline overlay (evita recompor sobre cada frame)
+       - pausa animações de paint pesadas (text-shadow / radial gradient) */
     body.video-playing::before { opacity: 0; }
+    body.video-playing .section-title,
+    body.video-playing .story-quote,
+    body.video-playing .promo-title,
+    body.video-playing .promo-tag,
+    body.video-playing .hero-tag,
+    body.video-playing .about-text h3,
+    body.video-playing .story-section::before,
+    body.video-playing .about-section::before,
+    body.video-playing .about-glow,
+    body.video-playing .about-img-wrap,
+    body.video-playing .rank-badge,
+    body.video-playing .rank-medal-svg .rays,
+    body.video-playing .feature-icon {
+      animation-play-state: paused !important;
+    }
+    /* Vídeo da história em camada GPU própria — isola compositing */
+    .story-video {
+      transform: translateZ(0);
+      will-change: transform;
+      backface-visibility: hidden;
+    }
 
     /* ANIMATIONS */
     @keyframes neonPulse {
@@ -957,9 +979,8 @@
       <div class="story-grid">
         <div class="reveal">
           <div class="story-video-wrap">
-            <video controls preload="none" playsinline poster="imgs/historia-poster.jpg" aria-label="Vídeo: Werdum reagindo ao 3 Contra Todos">
+            <video class="story-video" controls preload="none" playsinline poster="imgs/historia-poster.jpg" aria-label="Vídeo: Werdum reagindo ao 3 Contra Todos">
               <source src="videos/historia.mp4" type="video/mp4">
-              <track kind="captions" src="videos/historia.pt-BR.vtt" srclang="pt-BR" label="Português" default>
               Seu navegador não suporta vídeo HTML5.
             </video>
           </div>
