@@ -14,7 +14,13 @@
   <meta property="og:title" content="3 Contra Todos – Beat'em up no seu celular" />
   <meta property="og:description" content="Inspirado em Fabricio Werdum. Disponível na App Store por R$ 1,90. Em breve no Google Play." />
   <meta property="og:image" content="https://3contratodos.com/imgs/app-icon.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="pt_BR" />
+  <meta property="og:video" content="https://3contratodos.com/videos/historia.mp4" />
+  <meta property="og:video:type" content="video/mp4" />
+  <meta property="og:video:width" content="480" />
+  <meta property="og:video:height" content="832" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="3 Contra Todos – Beat'em up no seu celular" />
@@ -26,7 +32,7 @@
     "@context": "https://schema.org",
     "@type": "MobileApplication",
     "name": "3 Contra Todos",
-    "operatingSystem": "iOS, ANDROID",
+    "operatingSystem": "iOS, Android",
     "applicationCategory": "GameApplication",
     "description": "Inspirado em uma quebradeira real: ajude Werdum, Dida e Thor a derrotar Cocó e seus capangas e salvar o Wanderleeeeei.",
     "url": "https://3contratodos.com/",
@@ -40,6 +46,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <noscript>
+    <style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
 
   <style>
     :root {
@@ -66,6 +78,17 @@
     img, video { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
 
+    /* Foco visível por teclado — sem mexer em hover do mouse */
+    a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+    .badge:focus-visible, .rank-badge:focus-visible {
+      outline: 3px solid var(--gold-soft);
+      outline-offset: 4px;
+    }
+
     /* SCANLINE OVERLAY (CRT vibe) — sem mix-blend-mode (causa jank de scroll em alguns browsers) */
     body::before {
       content: '';
@@ -81,7 +104,6 @@
         transparent 3px
       );
       opacity: 0.6;
-      will-change: opacity;
     }
 
     /* ANIMATIONS */
@@ -116,10 +138,6 @@
     @keyframes scrollHint {
       0%, 100% { transform: translateY(0); opacity: 0.5; }
       50%      { transform: translateY(8px); opacity: 1; }
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
     }
     @keyframes spinSlow {
       from { transform: rotate(0deg); }
@@ -305,6 +323,15 @@
       overflow: hidden;
       contain: layout paint;
     }
+    /* Pula pintura/animação de seções fora da viewport — browser nativo */
+    .screens-section,
+    .features-section,
+    .about-section,
+    .story-section,
+    .final-cta {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 800px;
+    }
     .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
     .section-title {
       font-family: var(--pixel);
@@ -481,13 +508,13 @@
     }
     .rank-medal-svg .rays { transform-origin: 46px 56px; animation: spinSlow 24s linear infinite; }
     .rank-label {
-      margin-top: 6px;
-      padding: 4px 8px;
+      margin-top: 8px;
+      padding: 5px 10px;
       border-radius: 4px;
       background: rgba(0,0,0,0.78);
       border: 1px solid rgba(243,194,4,0.55);
       font-family: var(--pixel);
-      font-size: 7px;
+      font-size: 8px;
       letter-spacing: 1.6px;
       color: var(--gold-soft);
       line-height: 1.4;
@@ -497,15 +524,15 @@
       display: block;
       color: var(--ink);
       font-weight: 700;
-      margin-top: 2px;
-      font-size: 7px;
+      margin-top: 3px;
+      font-size: 9px;
       letter-spacing: 1.8px;
     }
     @media (max-width: 600px) {
-      .rank-badge { top: 22px; right: 28px; width: 70px; }
-      .rank-medal-svg { width: 70px; }
-      .rank-label { font-size: 6px; letter-spacing: 1.2px; padding: 3px 6px; }
-      .rank-label strong { font-size: 6px; letter-spacing: 1.4px; }
+      .rank-badge { top: 22px; right: 28px; width: 78px; }
+      .rank-medal-svg { width: 78px; }
+      .rank-label { font-size: 7px; letter-spacing: 1.3px; padding: 4px 7px; }
+      .rank-label strong { font-size: 8px; letter-spacing: 1.5px; }
     }
 
     /* STORY SECTION */
@@ -549,11 +576,12 @@
     }
     .story-video-caption {
       font-family: var(--pixel);
-      font-size: 9px;
+      font-size: 11px;
       color: var(--muted);
       letter-spacing: 2px;
       text-align: center;
-      margin-top: 14px;
+      margin-top: 16px;
+      line-height: 1.5;
     }
     .story-content {
       color: var(--muted);
@@ -608,7 +636,7 @@
     .story-credit {
       text-align: center;
       font-family: var(--pixel);
-      font-size: 9px;
+      font-size: 10px;
       color: var(--muted);
       letter-spacing: 2px;
       line-height: 1.6;
@@ -754,9 +782,6 @@
         <polygon points="14,18 30,52 24,52 10,28" fill="url(#ribbonRedDark)" opacity="0.85"/>
         <polygon points="70,4 78,18 62,52 46,52" fill="url(#ribbonRed)"/>
         <polygon points="78,18 82,28 68,52 62,52" fill="url(#ribbonRedDark)" opacity="0.85"/>
-        <!-- Recortes em V nas pontas -->
-        <polygon points="14,18 22,4 26,12" fill="#0a0a0a" opacity="0"/>
-
         <!-- Aro externo (rosette) — 16 pontos -->
         <g class="rays">
           <circle cx="46" cy="56" r="38" fill="url(#goldRim)"/>
@@ -783,18 +808,21 @@
 
         <!-- "1" central em estilo pixel/bold -->
         <text x="46" y="68" text-anchor="middle"
-              font-family="'Press Start 2P', monospace"
+              font-family="'Press Start 2P', 'Courier New', Courier, monospace"
+              font-weight="700"
               font-size="28"
               fill="#5e4400"
               stroke="#3a2a00" stroke-width="0.6">1</text>
         <text x="46" y="67.5" text-anchor="middle"
-              font-family="'Press Start 2P', monospace"
+              font-family="'Press Start 2P', 'Courier New', Courier, monospace"
+              font-weight="700"
               font-size="28"
               fill="#fff4b3" opacity="0.35">1</text>
 
         <!-- "Nº" pequeno acima do 1 -->
         <text x="46" y="44" text-anchor="middle"
-              font-family="'Press Start 2P', monospace"
+              font-family="'Press Start 2P', 'Courier New', Courier, monospace"
+              font-weight="700"
               font-size="6.5"
               fill="#5e4400"
               letter-spacing="1">Nº</text>
@@ -925,8 +953,9 @@
       <div class="story-grid">
         <div class="reveal">
           <div class="story-video-wrap">
-            <video controls preload="metadata" playsinline poster="imgs/historia-poster.jpg">
+            <video controls preload="none" playsinline poster="imgs/historia-poster.jpg" aria-label="Vídeo: Werdum reagindo ao 3 Contra Todos">
               <source src="videos/historia.mp4" type="video/mp4">
+              <track kind="captions" src="videos/historia.pt-BR.vtt" srclang="pt-BR" label="Português" default>
               Seu navegador não suporta vídeo HTML5.
             </video>
           </div>
@@ -968,10 +997,10 @@
       </div><!-- /.story-content -->
     </div><!-- /.story-grid -->
 
-    <div class="promo-banner reveal">
+    <div class="promo-banner reveal" data-deadline="2026-05-31T23:59:59-03:00">
       <div class="promo-tag">★ ATENÇÃO ★</div>
       <div class="promo-title">Top 1 do ranking mundial leva<br>kit completo dos patrocinadores</div>
-      <p class="promo-deadline">Quem chegar em <strong>1º lugar até 31 de maio</strong> ganha. Baixa e parte pra cima.</p>
+      <p class="promo-deadline">Quem chegar em <strong>1º lugar até 31 de maio de 2026</strong> ganha. Baixa e parte pra cima.</p>
     </div>
     </div><!-- /.container -->
   </section>
@@ -1019,6 +1048,16 @@
   </footer>
 
   <script>
+    // Esconde banner promocional após o deadline
+    (function() {
+      const banner = document.querySelector('.promo-banner[data-deadline]');
+      if (!banner) return;
+      const deadline = new Date(banner.dataset.deadline);
+      if (!isNaN(deadline) && Date.now() > deadline.getTime()) {
+        banner.style.display = 'none';
+      }
+    })();
+
     // Reveal on scroll
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
@@ -1065,32 +1104,67 @@
       v.addEventListener('canplay', tryPlay, { once: true });
     })();
 
-    // Pausa vídeos quando fora da tela (libera GPU/decodificador)
+    // Gerência de vídeos offscreen — pausa pra liberar GPU/decodificador,
+    // mas respeita o vídeo que o usuário está assistindo manualmente.
     (function() {
-      const videos = document.querySelectorAll('video');
-      if (!videos.length || !('IntersectionObserver' in window)) return;
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          const v = e.target;
-          if (e.isIntersecting) {
-            // Só dá play automático no hero (autoplay loop muted)
-            if (v.classList.contains('hero-video') && v.paused) {
+      if (!('IntersectionObserver' in window)) return;
+      const heroVideo = document.querySelector('.hero-video');
+      const userVideos = document.querySelectorAll('video:not(.hero-video)');
+
+      // Hero (autoplay loop muted): pausar fora da tela, retomar ao voltar.
+      if (heroVideo) {
+        const heroObs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              if (heroVideo.paused) heroVideo.play().catch(() => {});
+            } else {
+              if (!heroVideo.paused) heroVideo.pause();
+            }
+          });
+        }, { threshold: 0.05 });
+        heroObs.observe(heroVideo);
+      }
+
+      // Vídeos com controles (ex.: história): só pausa quando 100% fora da tela,
+      // e só retoma se já estava tocando antes (intenção do usuário).
+      userVideos.forEach(v => {
+        let wasPlaying = false;
+        const userObs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.intersectionRatio === 0) {
+              if (!v.paused) {
+                wasPlaying = true;
+                v.pause();
+              }
+            } else if (e.isIntersecting && wasPlaying) {
+              wasPlaying = false;
               v.play().catch(() => {});
             }
-          } else {
-            if (!v.paused) v.pause();
+          });
+        }, { threshold: [0, 0.5] });
+        userObs.observe(v);
+
+        // Se o usuário pausa manualmente enquanto está visível, esquecer o estado.
+        v.addEventListener('pause', () => {
+          if (v.getBoundingClientRect().top < window.innerHeight && v.getBoundingClientRect().bottom > 0) {
+            wasPlaying = false;
           }
         });
-      }, { threshold: 0.2 });
-      videos.forEach(v => obs.observe(v));
+      });
     })();
 
-    // Pausa animações quando a aba está oculta (libera CPU)
+    // Aba oculta: pausa hero (não mexe em vídeo do usuário; o browser já gerencia).
     document.addEventListener('visibilitychange', () => {
       const hero = document.querySelector('.hero-video');
       if (!hero) return;
-      if (document.hidden) hero.pause();
-      else hero.play().catch(() => {});
+      if (document.hidden) {
+        hero.pause();
+      } else {
+        // Só retoma se ainda estiver na viewport
+        const r = hero.getBoundingClientRect();
+        const visible = r.bottom > 0 && r.top < window.innerHeight;
+        if (visible) hero.play().catch(() => {});
+      }
     });
   </script>
 
