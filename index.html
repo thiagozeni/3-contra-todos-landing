@@ -13,7 +13,7 @@
     gtag('config', 'G-4YRY0BF18S');
   </script>
   <title>3 Contra Todos – Baixe o jogo para iOS e Android</title>
-  <meta name="description" content="Baixe 3 Contra Todos por apenas R$ 1,90 na App Store. Inspirado em uma quebradeira real: ajude Werdum, Dida e Thor a derrotar Cocó e seus capangas e salvar o Wanderleeeeei!" />
+  <meta name="description" content="Baixe 3 Contra Todos por R$ 1,90 na App Store. Beat'em up inspirado no Werdum: ajude Dida e Thor a derrotar Cocó e salvar o Wand." />
   <link rel="canonical" href="https://3contratodos.com/" />
   <link rel="icon" href="imgs/favicon.png" />
   <link rel="apple-touch-icon" href="imgs/apple-touch-icon.png" />
@@ -22,7 +22,7 @@
   <meta property="og:url" content="https://3contratodos.com/" />
   <meta property="og:title" content="3 Contra Todos – Beat'em up no seu celular" />
   <meta property="og:description" content="Inspirado em Fabricio Werdum. Disponível na App Store por R$ 1,90. Em breve no Google Play." />
-  <meta property="og:image" content="https://3contratodos.com/imgs/app-icon.png" />
+  <meta property="og:image" content="https://3contratodos.com/imgs/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="pt_BR" />
@@ -34,7 +34,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="3 Contra Todos – Beat'em up no seu celular" />
   <meta name="twitter:description" content="Inspirado em Fabricio Werdum. Disponível na App Store por R$ 1,90." />
-  <meta name="twitter:image" content="https://3contratodos.com/imgs/app-icon.png" />
+  <meta name="twitter:image" content="https://3contratodos.com/imgs/og-image.jpg" />
 
   <script type="application/ld+json">
   {
@@ -506,6 +506,11 @@
       filter: drop-shadow(0 12px 32px rgba(243, 194, 4, 0.3));
       position: relative;
       z-index: 2;
+      width: 100%;
+      max-width: 460px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
     .about-glow {
       position: absolute;
@@ -735,6 +740,65 @@
       margin-top: 8px;
     }
     .promo-deadline strong { color: var(--gold-soft); }
+
+    /* REAL ARCADE — full-bleed bridge */
+    .real-arcade {
+      position: relative;
+      padding: 0;
+      min-height: clamp(420px, 60vh, 720px);
+      display: grid;
+      place-items: end center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .real-arcade-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .real-arcade::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.15) 35%, rgba(10,10,10,0.85) 100%);
+      z-index: 1;
+    }
+    .real-arcade-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 24px;
+      max-width: 880px;
+    }
+    .real-arcade-tag {
+      display: inline-block;
+      font-family: var(--pixel);
+      font-size: clamp(9px, 1.2vw, 12px);
+      letter-spacing: 3px;
+      color: var(--gold);
+      background: rgba(243,194,4,0.10);
+      border: 1px solid rgba(243,194,4,0.45);
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-bottom: 22px;
+    }
+    .real-arcade h2 {
+      font-family: var(--pixel);
+      font-size: clamp(22px, 4.2vw, 44px);
+      line-height: 1.15;
+      color: #fff;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.85), 0 0 28px rgba(230,57,70,0.35);
+      margin: 0;
+    }
+    .real-arcade h2 span { color: var(--gold); }
+    @media (max-width: 600px) {
+      .real-arcade { min-height: 520px; }
+      .real-arcade-content { padding: 40px 20px; }
+    }
 
     /* FINAL CTA */
     .final-cta {
@@ -974,7 +1038,10 @@
       </div>
       <div class="about-img-wrap reveal">
         <div class="about-glow"></div>
-        <img class="about-img" src="imgs/good-guys.png" alt="Werdum, Dida e Thor" loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="imgs/arcade-cabinet-600.webp 600w, imgs/arcade-cabinet-900.webp 900w, imgs/arcade-cabinet.webp 1200w" sizes="(max-width: 768px) 320px, 460px" />
+          <img class="about-img" src="imgs/arcade-cabinet.jpg" width="1200" height="1603" alt="Fliperama 3 Contra Todos com side art de Werdum, Dida, Thor e Cocó" loading="lazy" />
+        </picture>
       </div>
     </div>
   </section>
@@ -1037,6 +1104,18 @@
       <p class="promo-deadline">Quem chegar em <strong>1º lugar até 31 de maio de 2026</strong> ganha. Baixa e parte pra cima.</p>
     </div>
     </div><!-- /.container -->
+  </section>
+
+  <!-- REAL ARCADE — bridge full-bleed -->
+  <section class="real-arcade" aria-label="O fliperama virou realidade">
+    <picture>
+      <source type="image/webp" srcset="imgs/fliperama-real-768.webp 768w, imgs/fliperama-real-1280.webp 1280w, imgs/fliperama-real.webp 1920w" sizes="100vw" />
+      <img class="real-arcade-img" src="imgs/fliperama-real.jpg" width="1920" height="1080" alt="Werdum, Dida, Thor e Wand jogando 3 Contra Todos em um fliperama cercados de fãs" loading="lazy" />
+    </picture>
+    <div class="real-arcade-content reveal">
+      <div class="real-arcade-tag">★ AGORA NO SEU BOLSO ★</div>
+      <h2>O FLIPERAMA EXISTE.<br><span>VOCÊ JOGA NO CELULAR.</span></h2>
+    </div>
   </section>
 
   <!-- FINAL CTA -->
