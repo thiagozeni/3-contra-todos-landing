@@ -500,17 +500,23 @@
     }
     .about-img-wrap {
       position: relative;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .about-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 70% 75% at 50% 50%, transparent 50%, #0a0a0a 100%);
+      z-index: 3;
     }
     .about-img {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 520px;
       height: auto;
       display: block;
-      margin: 0 auto;
-      -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 55%, transparent 100%);
-              mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 55%, transparent 100%);
     }
     .about-glow { display: none; }
     @media (max-width: 768px) {
