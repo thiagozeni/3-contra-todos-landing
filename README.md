@@ -1,4 +1,18 @@
-# 3contratodos.com
+# 3contratodos.com — ⚠️ REPOSITÓRIO APOSENTADO (04/08/2026)
+
+> **Este repo não serve mais nenhum site. Não edite nada aqui esperando ver mudança no ar.**
+>
+> O domínio `3contratodos.com` passou a ser servido pelo repo **`3-contra-todos-game`**, que hoje
+> concentra site, conteúdo e o jogo jogável (`/demo/` e `/v2/`). O GitHub Pages **deste** repo foi
+> desativado para liberar o domínio.
+>
+> **A home desta landing não foi descartada** — ela virou a home do site consolidado, com o vídeo
+> do Werdum, o selo "Nº 1 App Store BR" e os créditos preservados, mais a navegação do site. O
+> arquivo vivo é `3-contra-todos-game/landing/index.html`.
+>
+> Motivo da consolidação e passo a passo: `3-contra-todos-game/_info/migracao-dominio-3contratodos.md`.
+>
+> Mantido apenas como histórico.
 
 Landing page promocional do jogo **3 Contra Todos** para download nas lojas iOS e Android.
 
